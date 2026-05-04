@@ -1,0 +1,28 @@
+Interview Explanation
+
+Project:
+E-commerce Sales and Returns Reporting Dashboard
+
+Short explanation:
+I built an end-to-end BI reporting project using online retail transaction data. The goal was to analyse sales performance, return impact, product performance, and country-level trends.
+
+Process:
+I started by inspecting the raw transaction dataset and identifying data quality issues such as negative quantities, cancellation invoices, missing customer IDs, blank descriptions, zero prices, and non-product operational rows.
+
+I created cleaning logic to classify rows as sales, returns, or review rows. Then I exported a cleaned dataset and loaded it into PostgreSQL.
+
+In SQL, I created analysis views for sales, returns, products, and customers. I also fixed product analysis issues by excluding non-product rows like postage, fees, Amazon/admin rows, bank charges, and adjustments.
+
+In Power BI, I built a star-style model using a fact table and date, country, customer, and product dimensions. I created DAX measures for Gross Sales, Return Value, Net Sales, Return Rate, Total Orders, Total Customers, and Average Order Value.
+
+The final dashboard has four pages:
+- Executive Summary
+- Sales Trends
+- Returns Analysis
+- Product Analysis
+
+Main results:
+The business generated around 10.67M in gross sales, 896.81K in returns, and 9.77M in net sales. The return rate was 8.41%. The United Kingdom was the strongest sales market, and return value was concentrated in a small number of products.
+
+What I would improve:
+If more data were available, I would add return reasons, profit/margin data, marketing channel data, and shipment information to make the analysis more complete.

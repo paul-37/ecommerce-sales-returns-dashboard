@@ -1,0 +1,16 @@
+Resume Bullet Points
+
+Option 1 - Full version:
+- Built an end-to-end E-commerce Sales and Returns Reporting Dashboard using Excel, PostgreSQL, SQL, and Power BI to analyse sales performance, returns, customer activity, country trends, and product performance.
+
+Option 2 - SQL focused:
+- Cleaned and transformed online retail transaction data, created PostgreSQL tables and SQL views, and validated KPI logic for gross sales, return value, net sales, return rate, orders, and customers.
+
+Option 3 - Power BI focused:
+- Designed a Power BI dashboard with a star-style data model, DAX measures, slicers, and four report pages covering executive KPIs, sales trends, returns analysis, and product performance.
+
+Option 4 - Business impact focused:
+- Identified return impact of 896.81K against 10.67M gross sales, calculated an 8.41% return rate, and built reporting pages to highlight country-level and product-level performance.
+
+Best resume version:
+- Built an end-to-end E-commerce Sales and Returns Reporting Dashboard using PostgreSQL, SQL, and Power BI; cleaned transaction data, created SQL views, developed DAX KPIs, and designed a 4-page report covering sales trends, returns, countries, and product performance.
