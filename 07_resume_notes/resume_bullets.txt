@@ -14,3 +14,5 @@ Option 4 - Business impact focused:
 
 Best resume version:
 - Built an end-to-end E-commerce Sales and Returns Reporting Dashboard using PostgreSQL, SQL, and Power BI; cleaned transaction data, created SQL views, developed DAX KPIs, and designed a 4-page report covering sales trends, returns, countries, and product performance.
+
+GitHub Repository: https://github.com/paul-37/ecommerce-sales-returns-dashboard.git
