@@ -49,3 +49,5 @@ ecommerce-sales-returns-dashboard/
 ├── 06_images/
 └── 07_resume_notes/
 
+
+The raw and cleaned data files are not included in this repository due to file size and storage considerations. The dataset source is the UCI Online Retail dataset, and the cleaning process is documented in the project files.
