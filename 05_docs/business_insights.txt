@@ -1,0 +1,25 @@
+Business Insights
+
+1. Overall sales performance
+The business generated approximately 10.67M in gross sales and 9.77M in net sales after returns.
+
+2. Return impact
+Returns/cancellations account for around 896.81K, with a return rate of 8.41%. This means returns have a noticeable impact on final revenue.
+
+3. Country performance
+The United Kingdom is the dominant sales market. Other countries contribute much smaller sales values compared with the UK.
+
+4. Sales trend
+Sales increased strongly toward the later months of 2011, with a visible peak near the end of the year.
+
+5. Product performance
+Top-selling products include real merchandise items such as REGENCY CAKESTAND 3 TIER and PAPER CRAFT products after excluding postage, fees, and adjustment rows.
+
+6. Return concentration
+Return value appears concentrated in a small number of products, especially PAPER CRAFT , LITTLE BIRDIE.
+
+7. Data quality impact
+Some rows had missing CustomerID values, blank descriptions, zero prices, negative quantities, and non-product operational rows. These were handled using cleaning rules and reporting filters.
+
+8. Business recommendation
+Management should monitor high-return products separately and review whether specific products, fulfilment issues, or operational processes are driving return value.

@@ -1,0 +1,126 @@
+Power BI Data Model Plan
+
+1. Model type
+Star-style reporting model
+
+2. Main fact table
+fact_transactions
+
+Reason:
+This is the base transaction table containing one row per transaction line.
+
+3. Planned dimension tables
+
+A. dim_date
+Purpose:
+Support time analysis such as month, quarter, and year trends.
+
+Key field:
+invoice_date
+
+Expected useful fields:
+- invoice_date
+- year
+- month_number
+- month_name
+- year_month
+
+B. dim_country
+Purpose:
+Support country-level sales analysis.
+
+Key field:
+country
+
+Expected useful fields:
+- country
+
+C. dim_product
+Purpose:
+Support product-level analysis with clean product reporting.
+
+Key field:
+stockcode
+
+Expected useful fields:
+- stockcode
+- description
+
+Important note:
+Product reporting should use clean product logic that excludes non-product operational descriptions.
+
+D. dim_customer
+Purpose:
+Support customer-level analysis.
+
+Key field:
+customerid
+
+Expected useful fields:
+- customerid
+
+Important note:
+Blank customer IDs are excluded from customer analysis logic.
+
+4. Planned relationships
+
+v_fact_transactions_model[InvoiceDateOnly] -> dim_date[invoice_date]
+v_fact_transactions_model[Country] -> dim_country[Country]
+v_fact_transactions_model[StockCode] -> dim_product[StockCode]
+v_fact_transactions_model[CustomerID] -> dim_customer[CustomerID]
+
+
+5. Filtering direction
+Single direction from dimensions to fact table
+
+6. Important modeling notes
+- Keep fact_transactions as the core table
+- Use dimension tables for slicing and filtering
+- Product analysis should be based on clean product logic
+- Customer analysis should respect valid customer rules
+- Do not create unnecessary many-to-many relationships
+
+7. Why this model is suitable
+- Simple enough for a junior project
+- Strong enough for realistic reporting
+- Easy to explain in interviews
+- Supports KPI, trend, country, product, and customer analysis
+
+8. Dashboard pages supported by this model
+
+Executive Summary:
+- Gross Sales
+- Return Value
+- Net Sales
+- Return Rate
+- Total Orders
+- Total Customers
+
+Sales Trends:
+- Monthly Gross Sales
+- Monthly Return Value
+- Monthly Net Sales
+- Monthly Orders
+
+Country Analysis:
+- Sales by country
+
+Product Analysis:
+- Top products by sales
+- Top products by return value
+
+Customer Analysis:
+- Total customers
+- Customer activity trend
+
+9. What not to overbuild
+
+- Do not create too many fact tables
+- Do not create unnecessary bridge tables
+- Do not build a complex warehouse design for this project
+- Do not use bidirectional filters unless clearly needed
+- Do not create dimensions that the report will not use
+
+Next modeling step:
+Create SQL dimension views or tables for date, country, product, and customer to support Power BI relationships.
+

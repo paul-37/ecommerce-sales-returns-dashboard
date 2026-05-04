@@ -1,0 +1,142 @@
+Project data decisions - version 1
+
+1. Main row type categories
+
+A. Core Sales Rows
+Definition:
+- Quantity > 0
+- UnitPrice > 0
+- InvoiceNo does not start with C
+- Description is not blank
+
+Use:
+- These rows will be used for Gross Sales, order trends, product sales, country sales, and most dashboard analysis.
+
+B. Return / Cancellation Rows
+Definition:
+- Quantity < 0
+OR
+- InvoiceNo starts with C
+
+Use:
+- These rows will be used for return value and return trend analysis.
+
+C. Keep but Flag
+Definition:
+- CustomerID is blank
+- UnitPrice = 0
+- Rows that look like non-product or adjustment rows
+- Rows that need review before being used in product analysis
+
+Use:
+- These rows may stay in the base cleaned dataset for review, but may be excluded from some KPIs.
+
+D. Remove from Core Analysis
+Definition:
+- Description is blank
+- Quantity = 0
+- Clearly invalid rows if found
+
+Use:
+- These rows should not be included in the main KPI logic.
+
+2. Working KPI definitions
+
+Gross Sales:
+- Sum of Quantity * UnitPrice for Core Sales Rows only
+
+Return Value:
+- Sum of absolute value of Quantity * UnitPrice for Return / Cancellation Rows only
+
+Net Sales:
+- Gross Sales - Return Value
+
+Total Orders:
+- Distinct count of InvoiceNo from Core Sales Rows only
+
+Total Customers:
+- Distinct count of CustomerID from Core Sales Rows where CustomerID is not blank
+
+Return Rate:
+- Return Value / Gross Sales
+
+3. Working business decisions
+
+- Blank CustomerID rows should be kept in the base dataset for now.
+- But blank CustomerID rows should be excluded from customer-count KPIs.
+- InvoiceNo starting with C should be treated as return/cancellation logic.
+- Negative Quantity should also be treated as return logic.
+- If both signals appear together, that still belongs to returns.
+- UnitPrice <= 0 should be reviewed carefully before final KPI use.
+- Non-product rows should be reviewed and may later be excluded from product analysis pages.
+
+4. Honest limitations
+
+- This dataset may not link each returned row back to the exact original sold row.
+- So return analysis in this project will be based mainly on transaction logic, not perfect return matching.
+- Customer analysis may be limited because some CustomerID values are missing.
+- Product analysis may need exclusions if some rows are adjustments, fees, or non-product entries.
+
+
+
+
+
+# Data Decisions - Version 1
+
+## Evidence from raw data checks
+- C invoices: 9288
+- Negative quantities: 10624
+- Blank CustomerID: 135080
+- Blank Description: 1454
+- UnitPrice = 0: 2515
+- Negative UnitPrice: 2
+- Quantity = 0: 0
+
+## Interpretation
+- Returns/cancellations clearly exist in the dataset.
+- Return-like rows cannot be identified using only InvoiceNo starting with C, because negative quantity rows are more than C invoices.
+- Customer analysis will be limited because many rows have blank CustomerID.
+- Blank Description rows are weak for product-level reporting.
+- UnitPrice = 0 rows should not be treated as normal revenue rows.
+- Negative UnitPrice rows are suspicious and should be excluded from core KPI logic.
+
+## Working row rules
+
+### Keep as Core Sales Rows
+Use rows where:
+- Quantity > 0
+- UnitPrice > 0
+- InvoiceNo does not start with C
+- Description is not blank
+
+### Keep as Return / Cancellation Rows
+Use rows where:
+- InvoiceNo starts with C
+OR
+- Quantity < 0
+
+### Keep but Flag
+Rows where:
+- CustomerID is blank
+- UnitPrice = 0
+- Negative UnitPrice exists
+- row looks unusual or adjustment-like
+
+### Remove from Core Analysis
+Rows where:
+- Description is blank
+- UnitPrice < 0
+- row is clearly invalid
+
+## Working KPI logic
+- Gross Sales = sum of Quantity * UnitPrice from Core Sales Rows
+- Return Value = sum of absolute value of Quantity * UnitPrice from Return / Cancellation Rows
+- Net Sales = Gross Sales - Return Value
+- Total Orders = distinct InvoiceNo from Core Sales Rows
+- Total Customers = distinct CustomerID from Core Sales Rows where CustomerID is not blank
+- Return Rate = Return Value / Gross Sales
+
+## Honest limitations
+- Returns are identified using transaction logic, not perfect matching to original sales lines.
+- Customer analysis is limited by missing CustomerID values.
+- Some zero-price or unusual rows may represent non-standard business events.

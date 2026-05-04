@@ -1,0 +1,23 @@
+Power BI Model SQL Notes
+
+Model-ready fact view:
+- v_fact_transactions_model
+
+Dimension views:
+- dim_date
+- dim_country
+- dim_product
+- dim_customer
+
+Relationship keys:
+- InvoiceDateOnly to invoice_date
+- Country to Country
+- StockCode to StockCode
+- CustomerID to CustomerID
+
+Important modeling decision:
+Use StockCode as the product relationship key instead of Description.
+Use date-only field for date relationship instead of full timestamp.
+
+
+dim_product was revised to enforce one row per StockCode because some StockCode values appeared with multiple descriptions in the cleaned product view.

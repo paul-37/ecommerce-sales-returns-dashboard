@@ -1,0 +1,54 @@
+Dataset Name:
+Online Retail
+
+Source:
+UCI Machine Learning Repository
+
+File Name:
+online_retail_raw.xlsx
+
+Columns:
+- InvoiceNo
+- StockCode
+- Description
+- Quantity
+- InvoiceDate
+- UnitPrice
+- CustomerID
+- Country
+
+What one row represents:
+One row most likely represents one product line inside one transaction/invoice.
+
+Initial observations:
+1. The dataset is transaction-level data, not a ready-made summary table.
+2. InvoiceNo appears to be the transaction identifier.
+3. StockCode looks like the product code.
+4. Description gives the product name.
+5. Quantity shows how many units were involved in that line item.
+6. InvoiceDate contains both date and time.
+7. UnitPrice is the price per unit.
+8. CustomerID identifies the customer when available.
+9. Country shows the customer’s country and can be used for location analysis.
+10. Return or cancellation logic may exist because the official dataset description says invoices starting with 'c' indicate cancellations.
+
+Possible sales logic clues:
+- InvoiceNo can help identify transactions
+- Quantity can help measure units sold
+- UnitPrice can help calculate sales amount
+- InvoiceDate can help create monthly or daily trends
+- CustomerID can help with customer analysis
+- StockCode and Description can help with product analysis
+- Country can help with market/country analysis
+
+Possible return logic clues:
+- If InvoiceNo starts with 'c', it may indicate a cancellation
+- Negative quantity may also indicate returned or reversed items
+- Return logic will need to be tested carefully before final KPI definitions
+
+Questions / doubts:
+- Are all rows with InvoiceNo starting with 'c' returns?
+- Are all negative quantities returns?
+- Should blank CustomerID rows be kept or removed later?
+- Are there any non-product or adjustment rows that should be excluded?
+- How should we define Gross Sales, Returns, and Net Sales clearly?

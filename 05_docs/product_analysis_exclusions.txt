@@ -1,0 +1,41 @@
+Product Analysis Exclusions - Version 1
+
+Reason for review:
+Some top-ranked descriptions are not real sellable products. They represent postage, charges, fees, manual entries, or adjustments. Keeping them in product rankings would make product analysis misleading.
+
+Descriptions marked for exclusion from product analysis:
+- DOTCOM POSTAGE
+- POSTAGE
+- PACKING CHARGE
+- BANK CHARGES
+- AMAZON FEE
+- Manual
+- Adjust bad debt
+- dotcom adjust
+- adjust
+- Adjustment
+- adjustment
+- OOPS ! adjustment
+- re-adjustment
+- reverse 21/5/10 adjustment
+- reverse previous adjustment
+- Amazon Adjustment
+- taig adjust
+- taig adjust no stock
+- temp adjustment
+- amazon adjust
+- amazon
+- AMAZON
+- Amazon
+- Amazon sold sets
+- amazon sales
+- sold as set on dotcom and amazon
+
+Working rule:
+Exclude postage, charges, fees, manual entries, bank-related rows, Amazon/admin rows, and adjustment descriptions from product-level reporting.
+
+Important note:
+These rows may remain in the base fact table, but they should not be treated as real products in product sales rankings or product return rankings.
+
+Business benefit:
+This makes product analysis more realistic and prevents operational rows from appearing as top-performing or worst-performing products.

@@ -1,0 +1,150 @@
+Business Questions and KPI Definitions
+
+1. Main business objective
+Build a reporting dashboard that helps management track sales performance, return impact, customer activity, and product/country performance over time.
+
+2. Main stakeholder questions
+
+Q1. How much gross sales did the business generate?
+Q2. How much value was lost through returns/cancellations?
+Q3. What is the net sales value after returns?
+Q4. How many orders were placed?
+Q5. How many customers made valid purchases?
+Q6. How are sales changing month by month?
+Q7. Which countries generate the most sales?
+Q8. Which products generate the most sales?
+Q9. Which products have the highest return value?
+Q10. Is return activity becoming worse over time?
+
+3. Final KPI definitions
+
+Gross Sales
+Definition:
+Sum of SalesAmount where IsValidForSales = 1
+
+Current result:
+10666684.95
+
+Meaning:
+Total value of valid positive sales transactions before subtracting returns.
+
+Return Value
+Definition:
+Sum of ABS(SalesAmount) where RowType = 'Return'
+
+Current result:
+896812.85
+
+Meaning:
+Total value of returned or cancelled transactions.
+
+Net Sales
+Definition:
+Gross Sales - Return Value
+
+Current result:
+9769872.10
+
+Meaning:
+Sales value remaining after returns are removed.
+
+Total Orders
+Definition:
+Count of distinct InvoiceNo where IsValidForSales = 1
+
+Current result:
+19960
+
+Meaning:
+Number of valid sales orders in the dataset.
+
+Total Customers
+Definition:
+Count of distinct CustomerID where IsValidForCustomerAnalysis = 1
+
+Current result:
+4338
+
+Meaning:
+Number of identifiable customers with valid sales transactions.
+
+4. KPI notes and assumptions
+
+- Gross Sales excludes returns, review rows, blank-description problem rows, and non-valid sales rows.
+- Return Value uses return/cancellation logic based on RowType = 'Return'.
+- Net Sales is a reporting metric derived from Gross Sales minus Return Value.
+- Total Orders counts distinct invoice numbers from valid sales rows only.
+- Total Customers excludes blank CustomerID rows.
+- Customer totals may be understated because some rows have missing CustomerID.
+- Return analysis is transaction-based and does not perfectly match every return to its original sale.
+
+5. Dashboard sections these KPIs support
+
+Executive summary:
+- Gross Sales
+- Return Value
+- Net Sales
+- Total Orders
+- Total Customers
+
+Sales trends:
+- Monthly Gross Sales
+- Monthly Net Sales if created later
+
+Returns analysis:
+- Return Value
+- Return trend over time
+- Top returned products
+
+Market analysis:
+- Country sales ranking
+
+Product analysis:
+- Top products by sales
+- Top products by return value
+
+
+
+Return Rate
+Definition:
+Return Value / Gross Sales
+
+Current result:
+To be calculated
+
+Meaning:
+The share of gross sales value lost through returns.
+
+Raw SQL result:		  0.841
+Business display format:  8.41%
+
+
+6. What this dashboard will not answer well
+
+- Why customers returned items
+- Exact return reason by product
+- Exact matching between every return row and original sale row
+- Profitability, because cost data is not available
+- Marketing channel performance, because acquisition/source data is not available
+
+7. Final dashboard question list
+
+Executive page:
+- What are the headline KPIs?
+- Is the business losing a meaningful amount through returns?
+
+Sales page:
+- How are sales changing over time?
+- Which countries and products drive the most sales?
+
+Returns page:
+- How much value is being lost through returns?
+- Which products contribute most to return value?
+- Is return activity increasing over time?
+
+Customer page:
+- How many identifiable customers purchased?
+- How concentrated is customer activity over time?
+
+
+Product rankings exclude non-product operational descriptions such as postage, fees, bank charges, manual entries, Amazon/admin rows, and adjustment-related descriptions.

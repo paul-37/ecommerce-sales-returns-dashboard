@@ -1,0 +1,21 @@
+SQL Layer Notes
+
+Base table:
+- fact_transactions
+
+Analysis views:
+- v_sales_transactions
+- v_return_transactions
+- v_customer_transactions
+- v_product_transactions
+
+Purpose:
+- Keep the base table unchanged
+- Create reusable filtered views for analysis
+- Make SQL queries and Power BI import cleaner
+
+Important reporting logic:
+- v_sales_transactions = valid sales rows only
+- v_return_transactions = return rows only
+- v_customer_transactions = valid customer-analysis rows only
+- v_product_transactions = valid product-analysis rows only

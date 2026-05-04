@@ -1,0 +1,26 @@
+SQL Setup Notes
+
+Database name:
+ecommerce_sales_return_db
+
+Database tool:
+PostgreSQL
+
+SQL editor tool:
+DBeaver Community
+
+Connection target:
+localhost:5432
+
+Purpose:
+This database will store the cleaned transaction table for SQL analysis and later Power BI reporting.
+
+Main imported table:
+fact_transactions
+
+Source file:
+online_retail_cleaned.csv
+
+First SQL validation checks:
+- row count check
+- row type count check

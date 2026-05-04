@@ -1,0 +1,137 @@
+Cleaning Plan - Version 1
+
+1. Base columns to keep
+- InvoiceNo
+- StockCode
+- Description
+- Quantity
+- InvoiceDate
+- UnitPrice
+- CustomerID
+- Country
+
+2. New helper columns to add
+- SalesAmount
+- RowType
+- IsReturn
+- IsValidForSales
+- IsValidForCustomerAnalysis
+- IsValidForProductAnalysis
+
+3. RowType logic
+A. Sale
+- Quantity > 0
+- UnitPrice > 0
+- InvoiceNo does not start with C
+- Description is not blank
+
+B. Return
+- Quantity < 0
+OR
+- InvoiceNo starts with C
+
+C. Review
+- UnitPrice = 0
+- UnitPrice < 0
+- Blank Description
+- Other unusual rows if found
+
+4. SalesAmount logic
+- SalesAmount = Quantity * UnitPrice
+
+5. Main inclusion rules
+A. Keep in base cleaned table
+- Most rows should stay in the cleaned base table, even if flagged
+- This allows transparency and review
+
+B. Exclude from core sales KPIs
+- Return rows
+- UnitPrice <= 0 rows
+- Blank Description rows
+- Clearly invalid rows
+
+C. Exclude from customer KPIs
+- Blank CustomerID rows
+
+D. Exclude from product KPIs
+- Blank Description rows
+- Non-product or unusual rows if found
+
+6. Final project approach
+- Build one cleaned base table first
+- Then create SQL views or filtered logic for sales analysis, return analysis, and customer analysis
+
+7. Reason for this approach
+- It is cleaner and more professional to keep one reviewed base table and apply analysis rules on top of it
+- It also makes the project easier to explain in interviews
+
+8. Current decisions based on raw checks
+- Return logic should use both C invoices and negative quantities
+- Blank CustomerID is a major limitation, not a reason to delete all those rows
+- Blank Description rows should not be used in core product analysis
+- UnitPrice = 0 rows should not be used in revenue KPIs
+- Negative UnitPrice rows are likely invalid and should be excluded from KPI logic
+- Quantity = 0 is not an issue in this dataset
+
+
+9. Fields planned for SQL import
+- InvoiceNo
+- StockCode
+- Description
+- Quantity
+- InvoiceDate
+- UnitPrice
+- CustomerID
+- Country
+- SalesAmount
+- RowType
+- IsReturn
+- IsValidForSales
+- IsValidForCustomerAnalysis
+- IsValidForProductAnalysis
+
+
+
+10. Question and answer
+
+Q1. Should we delete all problematic rows now?
+Answer:
+No. Better to keep one cleaned base table and flag rows properly.
+
+Q2. Why not keep only perfect sales rows?
+Answer:
+Because we also need return analysis and honest documentation.
+
+Q3. Why are helper columns useful?
+Answer:
+They make SQL and Power BI logic easier, cleaner, and easier to explain.
+
+Q4. Why keep blank CustomerID rows in the base table?
+Answer:
+Because those rows may still contain real sales value.
+
+Q5. What is the final goal of cleaning?
+Answer:
+To create one analysis-ready transaction table that supports sales, returns, customer, product, and country analysis.
+
+11. Validation rule
+- Helper column counts must be checked before moving data into SQL
+- Return rows should match IsReturn = 1
+- Customer-valid rows should never be more than sales-valid rows
+- Product-valid rows should never be more than sales-valid rows
+
+
+12. Final cleaned export
+File name:
+online_retail_cleaned.csv
+
+Purpose:
+This is the final SQL-ready transaction file for PostgreSQL import.
+
+Contents:
+- original transaction columns
+- helper logic columns
+- one row per transaction line
+
+Important note:
+Helper columns were converted from formulas to fixed values before CSV export.
